@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emporio</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/responsive/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #e0e9eb;
+        }
+
+        /* Menu fixo */
+        nav {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            background-color: #1e1e1e;
+            z-index: 1000;
+            padding: 1px 0;
+        }
+
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: rgb(41, 194, 221);
+        }
+
+        /* Estilo do banner */
+        .hero-section {
+            background: linear-gradient(135deg, rgb(41, 194, 221), #f5f5f5);
+            color: white;
+            height: 1100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero-section h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .hero-section p {
+            font-size: 1.4rem;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .btn-primary {
+            background-color: rgb(41, 194, 221);
+            border: none;
+            padding: 12px 30px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .btn-primary:hover {
+            background-color: #003cff;
+        }
+
+        /* Seção Sobre */
+        .about-section {
+            background: #fff;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .about-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .about-section p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            font-weight: 300;
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+
+        /* Seção de Produtos */
+        .products-section {
+            background: #fafafa;
+            padding: 30px 0;
+            text-align: center;
+            background: linear-gradient(135deg, rgb(72, 202, 224), #f5f5f5);
+        }
+
+        .products-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .product-card {
+            background-color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .product-card h3 {
+            font-size: 1.6rem;
+            margin-top: 15px;
+            color: #333;
+        }
+
+        .product-card p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Seção de Contato */
+        .contact-section {
+            background:rgb(41, 194, 221);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .contact-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .contact-section p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: #1e1e1e;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer a {
+            text-decoration: none;
+            color: rgb(41, 194, 221);
+            font-weight: 600;
+            margin: 0 5px;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color:#003cff;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Menu de navegação -->
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#about">Sobre</a></li>
+            <li><a href="#productsinicio">Produtos</a></li>
+            <li><a href="#contact">Contato</a></li>
+        </ul>
+    </nav>
+
+    <!-- Seção Hero -->
+    <section id="productsinicio" class="hero-section">
+        <h1><br>Bem-vindo ao Eporio</h1>
+        <p>As melhores minifigures só aqui!</p>
+        <a href="cadastro.html" class="btn-primary">Entrar na Loja</a>
+        <br>
+        
+           <!-- Seção Produtos -->
+    <section id="products" class="products-section">
+        <h2>Produtos em Destaque</h2>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <img src="https://m.media-amazon.com/images/I/71xJ-wzb0VL.jpg" alt="Produto 1">
+                        <h3>Warhammer 40K Introductory set</h3>
+                        <p>R$ 480,00</p>
+                        <a href="#" class="btn btn-primary">Comprar Agora</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <img src="https://modeltune.co.uk/cdn/shop/files/Kill-Team_-Hivestorm-Full-Box-Set_grande.jpg?v=1729602770" alt="Produto 2">
+                        <h3>Warhammer 40,000: Kill Team - Hivestorm Box Set</h3>
+                        <p>R$ 1290,99</p>
+                        <a href="#" class="btn btn-primary">Comprar Agora</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <img src="https://images-na.ssl-images-amazon.com/images/I/81CrZCoBeJL._AC_UL600_SR600,600_.jpg" alt="Produto 3">
+                        <h3>Warhammer 40K Ultimate Starter Set</h3>
+                        <p>R$ 1670,00</p>
+                        <a href="#" class="btn btn-primary">Comprar Agora</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    </section>
+
+    <!-- Seção Sobre -->
+    <section id="about" class="about-section">
+        <h2>Sobre Nós</h2>
+        <p>Sobre Nós
+
+            Bem-vindo ao nosso universo de batalhas épicas e miniaturas detalhadas! Somos apaixonados por Warhammer 40K e dedicados a oferecer aos colecionadores e jogadores a melhor seleção de miniaturas, ferramentas de pintura e cenários. Nossa missão é proporcionar a você uma experiência imersiva e emocionante, onde cada miniatura conta uma história e cada batalha é uma aventura inesquecível.
+            
+            Aqui no Emporio, valorizamos a qualidade e a criatividade. Nossos produtos são escolhidos a dedo para garantir que você tenha acesso às miniaturas mais detalhadas e ferramentas essenciais para personalizar seu exército. Quer você seja um veterano experiente ou um iniciante entusiasmado, temos tudo o que você precisa para transformar suas ideias em realidade.
+            
+            Nossa equipe é composta por entusiastas de Warhammer 40K que entendem a importância de cada detalhe. Estamos aqui para ajudar você a encontrar as peças perfeitas para sua coleção, oferecer dicas de pintura e modelagem, e compartilhar nossa paixão pelo universo de Warhammer 40K. Junte-se a nós e embarque nessa jornada épica!</p>
+    </section>
+
+    <!-- Seção Contato -->
+    <section id="contact" class="contact-section">
+        <h2>Entre em Contato</h2>
+        <p>Se você tiver dúvidas, sugestões ou precisa de ajuda, entre em contato conosco! Nossa equipe está pronta para te atender.</p>
+        <a href="mailto:contato@ecommerce.com">contato@emporio.com.br</a>
+    </section>
+   
+    <!-- Seção Login -->
+    <div class="container" >
+        <div class="row justify-content-center align-items-center vh-100">
+            <div class="col-md-6">
+                <h2 class="text-center">Login</h2>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" class="form-control" placeholder="Digite seu e-mail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="senha">Senha</label>
+                        <input type="password" id="senha" class="form-control" placeholder="Digite sua senha" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+                </form>
+                <div class="text-center mt-3">
+                    <p>Não tem uma conta? <a href="cadastro.html">Cadastre-se</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; 2024 E-commerce - Todos os direitos reservados. | <a href="#">Política de Privacidade</a></p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+    <script>
+        const USUARIO_CREDENCIAIS = {
+            email: "julio@fatec.com",
+            senha: "julio"
+        };
+
+        document.getElementById("loginForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const email = document.getElementById("email").value;
+            const senha = document.getElementById("senha").value;
+
+            if (email === USUARIO_CREDENCIAIS.email && senha === USUARIO_CREDENCIAIS.senha) {
+                sessionStorage.setItem("usuarioLogado", JSON.stringify({ email }));
+                window.location.href = "produtos.html"; // Redireciona para a página de produtos
+            } else {
+                alert("E-mail ou senha incorretos!");
+            }
+        });
+    </script>
+</body>
+</html>

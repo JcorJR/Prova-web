@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos - Emporio</title>
+    <link rel="stylesheet" href="/responsive/produtos.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f4f4f4;
+        }
+
+        /* Menu fixo */
+        nav {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            background-color: #1e1e1e;
+            z-index: 1000;
+            padding: 10px 0;
+        }
+
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav ul li {
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #003cff;
+        }
+
+        /* Nome do usuário - Seção acima do carrinho */
+        #userGreetingContainer {
+            position: absolute;
+            top: 15%;
+            right: 20px;
+            background-color:  rgb(41, 194, 221);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            display: none;
+            transition: all 0.3s ease;
+        }
+
+        /* Botão de deslogar */
+        #logoutButton {
+            background-color:  rgb(41, 194, 221);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        #logoutButton:hover {
+            background-color: #003cff;
+        }
+
+        /* Seção Produtos */
+        .products-page {
+            background: #fafafa;
+            padding: 60px 0;
+            padding-top: 80px; /* Para não sobrepor o menu fixo */
+        }
+
+        .products-page h2 {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        .product-card {
+            background-color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .product-card img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .product-card h3 {
+            font-size: 1.8rem;
+            margin-top: 15px;
+            color: #333;
+        }
+
+        .product-card p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .product-card .price {
+            font-size: 1.4rem;
+            color:#003cff;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .product-card .btn-primary {
+            background-color: rgb(41, 194, 221);
+            border: none;
+            padding: 12px 30px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: background-color 0.3s ease;
+        }
+
+        .product-card .btn-primary:hover {
+            background-color:#003cff;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Painel do Carrinho */
+        .cart-panel {
+            position: fixed;
+            top: 50%;
+            right: 0;
+            width: 340px;
+            background: #fff;
+            box-shadow: -4px 0 20px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            z-index: 9999;
+            height: 50%;
+            overflow-y: auto;
+            border-radius: 8px 0 0 8px;
+        }
+
+        .cart-panel h3 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+
+        .cart-item img {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+        }
+
+        .cart-item-info {
+            flex-grow: 1;
+            margin-left: 10px;
+        }
+
+        .cart-item .item-name {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .cart-item .item-price {
+            color: #333;
+        }
+
+        .cart-item .item-quantity {
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-item .item-quantity input {
+            width: 40px;
+            padding: 5px;
+            margin-left: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .cart-item .item-quantity button {
+            margin-left: 5px;
+            padding: 5px 10px;
+            background-color: rgb(41, 194, 221);
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        .cart-item .item-quantity button:hover {
+            background-color:#003cff;
+        }
+
+        .cart-footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            font-weight: bold;
+        }
+
+        .cart-footer .total-price {
+            color:#333;
+            font-size: 1.5rem;
+        }
+
+        .cart-footer .btn-checkout {
+            background-color:  rgb(41, 194, 221);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .cart-footer .btn-checkout:hover {
+            background-color: #003cff;
+        }
+
+    
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#about">Sobre</a></li>
+            <li><a href="produtos.html">Produtos</a></li>
+            <li><a href="#contact">Contato</a></li>
+
+            <li><button id="logoutButton" class="btn btn-danger">Deslogar</button></li>
+        </ul>
+    </nav>
+
+    <div id="userGreetingContainer">
+        <span id="userGreeting"></span>
+    </div>
+
+    <section class="products-page">
+        <div class="container">
+            <h2>Confira Nossos Produtos</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <img src="https://m.media-amazon.com/images/I/71xJ-wzb0VL.jpg" alt="Produto 1">
+                        <h3>Warhammer 40K Introductory set</h3>
+                        <p>Outro ótimo set para iniciantes, este conjunto oferece dois conjuntos de modelos push-fit, ferramentas e tintas, um tapete de jogo, guias úteis e todos os dados e ferramentas necessárias para jogar. É uma ótima maneira de se familiarizar com o hobby e expandir sua coleção.</p>
+                        <p class="price">R$ 480,99</p>
+                        <button class="btn-primary" onclick="addToCart('Warhammer 40K Introductory set', 480.00)">Adicionar ao Carrinho</button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <img src="https://modeltune.co.uk/cdn/shop/files/Kill-Team_-Hivestorm-Full-Box-Set_grande.jpg?v=1729602770" alt="Produto 2">
+                        <h3>Warhammer 40,000: Kill Team - Hivestorm Box Set</h3>
+                        <p>Este set é perfeito para jogadores que já têm alguma experiência e querem aprofundar-se nas batalhas estratégicas de Warhammer 40K. Inclui miniaturas dos Tyranids e muitos elementos de cenário para criar batalhas intensas.</p>
+                        <p class="price">R$ 1290,99</p>
+                        <button class="btn-primary" onclick="addToCart('Warhammer 40,000: Kill Team - Hivestorm Box Set', 1290.00)">Adicionar ao Carrinho</button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <img src="https://images-na.ssl-images-amazon.com/images/I/81CrZCoBeJL._AC_UL600_SR600,600_.jpg" alt="Produto 3">
+                        <h3>Warhammer 40,000: Ultimate Starter Set</h3>
+                        <p>Este set é ideal para iniciantes e inclui uma variedade de miniaturas, ferramentas de modelagem, tintas e tudo o que você precisa para começar a jogar. É uma excelente escolha para quem quer se aventurar no universo de Warhammer 40K.</p>
+                        <p class="price">R$ 1670,00</p>
+                        <button class="btn-primary" onclick="addToCart('Warhammer 40,000: Ultimate Starter Set', 1670.00)">Adicionar ao Carrinho</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="cart-panel">
+        <h3>Carrinho</h3>
+        <div id="cartItems"></div>
+        <div class="cart-footer">
+            <span class="total-price">Total: R$ 0,00</span>
+            <button class="btn-checkout" onclick="checkout()">Finalizar Compra</button>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        // Verifica se o usuário está logado
+        if (!sessionStorage.getItem("usuarioLogado")) {
+            window.location.href = "login.html"; // Redireciona para a página de login se não estiver logado
+        } else {
+            // Exibe o nome do usuário no painel acima do carrinho
+            const usuarioInfo = JSON.parse(sessionStorage.getItem("usuarioLogado"));
+            const usuarioNome = usuarioInfo.email.split('@')[0]; // Pega tudo antes do '@' no e-mail
+            document.getElementById("userGreeting").textContent = `Olá, ${usuarioNome}`;
+            document.getElementById("userGreetingContainer").style.display = 'block';
+        }
+
+        // Botão de deslogar
+        document.getElementById('logoutButton').addEventListener('click', function() {
+            // Remove a chave de login
+            sessionStorage.removeItem("usuarioLogado");
+
+            // Redireciona para a página inicial
+            window.location.href = "index.html";
+        });
+
+        // Função de adicionar ao carrinho e outras funções seguem normalmente...
+        let cart = [];
+
+        function addToCart(name, price) {
+            const product = {
+                name: name,
+                price: price,
+                quantity: 1
+            };
+
+            // Verifica se o produto já está no carrinho
+            const existingProductIndex = cart.findIndex(item => item.name === name);
+            if (existingProductIndex >= 0) {
+                cart[existingProductIndex].quantity++;
+            } else {
+                cart.push(product);
+            }
+
+            updateCartPanel();
+        }
+
+        function updateCartPanel() {
+            const cartItemsContainer = $('#cartItems');
+            cartItemsContainer.empty();
+
+            let total = 0;
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                cartItemsContainer.append(`
+                    <div class="cart-item">
+                        
+                        <div class="cart-item-info">
+                            <span class="item-name">${item.name}</span>
+                            <span class="item-price">R$ ${item.price.toFixed(2)}</span>
+                        </div>
+                        <div class="item-quantity">
+                            <button onclick="changeQuantity('${item.name}', -1)">-</button>
+                            <input type="text" value="${item.quantity}" readonly>
+                            <button onclick="changeQuantity('${item.name}', 1)">+</button>
+                        </div>
+                    </div>
+                `);
+            });
+
+            // Atualiza o preço total
+            $('.total-price').text(`Total: R$ ${total.toFixed(2)}`);
+        }
+
+        function changeQuantity(name, change) {
+            const productIndex = cart.findIndex(item => item.name === name);
+            if (productIndex >= 0) {
+                cart[productIndex].quantity += change;
+                if (cart[productIndex].quantity <= 0) {
+                    cart.splice(productIndex, 1);
+                }
+                updateCartPanel();
+            }
+        }
+
+        function checkout() {
+            alert('Compra finalizada! Direcionando para a página de checkout...');
+            window.location.href = "checkout.html";
+        }
+    </script>
+
+</body>
+
+</html>
